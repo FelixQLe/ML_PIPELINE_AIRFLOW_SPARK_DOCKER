@@ -1,0 +1,50 @@
+--- Feedback Begin ---
+
+Problem 1: Raw Data Processing
+Objective: Ingest and process raw stock market datasets.
+(Total 65/100)
+Tasks:
+[5/5] 1. Download the ETF and stock datasets from the primary dataset available at https://www.kaggle.com/datasets/jacksoncrow/stock-market-dataset.
+[30/55] 2. Setup a data structure to retain all data from ETFs and stocks with the following columns.
+-- Pandas-based solution, with a complex concurrent processing implementation. The codebase is a bit hard to follow with over-fragmentation. 
+A better tool for the job may be Spark with built-in concurrency management and also the advantage of the distributed filesystem to minimize memory stress. 
+[30/40] 3. Convert the resulting dataset into a structured format (e.g. Parquet).
+-- Similar to above. Spark utilization would have minimized both the implementation complexity and improved efficiency
+
+Problem 2: Feature Engineering
+Objective: Build some feature engineering on top of the dataset from Problem 1.
+(Total 50/100, Bonus 0/10)
+Tasks:
+[20/40] 1. Calculate the moving average of the trading volume (Volume) of 30 days per each stock and ETF, and retain it in a newly added column vol_moving_avg. 
+-- Similar to above. There's also a confusing implementation to cast the map return to a list (and assigned to an unused variable), 
+effectively materializing the memory usage from just "lazy" iterators. Presumably the list casting is to trigger the map to actually invoke the underlying processing functions, 
+where in reality a for loop would have been both easy to reason with and without the unnecessary memory allocation. 
+Similar to above, a Spark-based implementation would have been a lot cleaner since it has built-in concurrency/batching management 
+[20/40] 2. Similarly, calculate the rolling median and retain it in a newly added column adj_close_rolling_med.
+-- Same as above
+[10/20] 3. Retain the resulting dataset into the same format as Problem 1, but in its own stage/directory distinct from the first. 
+-- Similar to above on Spark utilization.
+[Bonus 0/10] 4. Write unit tests for any relevant logic.
+-- No visible tests
+
+Problem 3: Integrate ML Training
+Objective: Integrate an ML predictive model training step into the data pipeline.
+(Total 100/100, Bonus 3/10)
+Tasks:
+[60/60] 1. Integrate the ML training process as a part of the data pipeline.
+[20/20] 2. Save the resulting model to disk.
+[20/20] 3. Persist any training metrics, such as loss and error values as log files.
+[Bonus 3/10] 4. If you choose your own model implementation, articulate why it's better as a part of your submission.
+-- A LSTM-based implementation with grid search hyperparameter tuning. No articulation found
+
+Problem 4: Model Serving
+Objective: Build an API service to serve the trained predictive model.
+(Total 60/100, Bonus 0/10)
+Tasks:
+[20/20] 1. Implement an API service to serve the trained predictive model.
+[40/80] 2. An /predict API endpoint which takes two values, vol_moving_avg and adj_close_rolling_med, and responds with an integer value that represents the trading volume. 
+-- Flask-based model serving API endpoint. Pandas is unnecessary and could bloat the dependency, where the actual needs here is a Numpy array or just a Python List. 
+Endpoint parameter casting could result in value error (e.g. ?vol_moving_avg=abc) which would result in unhandled error and potentially crash the API server 
+[Bonus 0/10] 3. Test the API service, document your methodology, provisioned computing resources, 
+test results, a breakdown of observable bottlenecks (e.g. model loading/inference, socket/IO, etc.), and improvement suggestions for hypothetical future iterations. 
+-- No visible performance tests
