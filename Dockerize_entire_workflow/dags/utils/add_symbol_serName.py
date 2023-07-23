@@ -21,33 +21,3 @@ def add_name(file):
     #df.name = name
     #return df
     save_parquet(df[features], name, path)
-
-
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, FloatType, DateType, IntegerType
-
-# Step 1: Create a SparkSession
-spark = SparkSession.builder.appName("ETFs_Stocks_Data").getOrCreate()
-
-# Step 2: Define the schema
-schema = StructType([
-    StructField("Symbol", StringType(), True),
-    StructField("Security Name", StringType(), True),
-    StructField("Date", StringType(), True),
-    StructField("Open", FloatType(), True),
-    StructField("High", FloatType(), True),
-    StructField("Low", FloatType(), True),
-    StructField("Close", FloatType(), True),
-    StructField("Adj Close", FloatType(), True),
-    StructField("Volume", IntegerType(), True)
-])
-
-# Step 3: Create an empty DataFrame with the defined schema
-etf_stocks_df = spark.createDataFrame([], schema)
-
-# Step 4: Read data from CSV into the DataFrame
-file_path = "path/to/etf_stock_data.csv"  # Update this with the actual path of your CSV file
-etf_stocks_df = spark.read.csv(file_path, header=True, schema=schema)
-
-# Now, the 'etf_stocks_df' DataFrame contains your data with the specified columns and data types.
-# You can perform various operations on this DataFrame using Spark's APIs.
