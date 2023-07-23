@@ -4,6 +4,7 @@ from utils.save_parquet import save_parquet
 #read metal symbol files
 metal_symbol = pd.read_csv('dags/data/symbols_valid_meta.csv')
 metal_symbol = metal_symbol[['Symbol', 'Security Name']]
+#correct some wrong spelling, coresponding to Stock file name
 metal_symbol['Symbol'] = metal_symbol['Symbol'].str.replace('$', '-',regex=False)
 metal_symbol['Symbol'] = metal_symbol['Symbol'].str.replace('.V', '',regex=False)
 #creat mapping dictionary
