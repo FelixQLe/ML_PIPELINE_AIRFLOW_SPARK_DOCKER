@@ -18,3 +18,5 @@ sc = SparkContext.getOrCreate(conf)
 spark = SparkSession.builder.master('local[*]').\
                 config('spark.sql.debug.maxToStringFields', '100').\
                 appName("ETFs Spark Airflow Docker").getOrCreate()
+
+
