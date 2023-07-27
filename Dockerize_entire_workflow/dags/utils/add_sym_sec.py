@@ -5,7 +5,7 @@ from pyspark.sql.functions import input_file_name, lit, col, isnull
 from pyspark.sql import functions as F
 import os
 
-#Create a spark Context class, with custom config
+#Create a spark Context class, with custom config to optimize the performance
 conf = SparkConf()
 #conf.set('spark.default.parallelism', 700)
 #conf.set('spark.sql.shuffle.partitions', 700)
@@ -24,8 +24,14 @@ spark = SparkSession.builder.master('local[*]').\
                 config('spark.sql.debug.maxToStringFields', '100').\
                 appName("ETFs Spark Airflow Docker").getOrCreate()
 
-
-def preprocessing_data(spark, input_file, output_dir, symbol_mapping):
+def add_symbol_sec_name(input_file):
+    """
+    Function adds Symbol and Security Name to stock file
+    """
+    output_dir = "../data/processed_stocks_etfs"
+    #Mapping dict
+    meta_symbol = spark.read.csv("../data/symbols_valid_meta.csv", header=True)
+    symbol_mapping = meta_symbol.select("Symbol", "Security Name").rdd.collectAsMap()
     #Define Schema for the data
     existing_schema = StructType([
         StructField("Date", StringType(), False),
@@ -37,7 +43,7 @@ def preprocessing_data(spark, input_file, output_dir, symbol_mapping):
         StructField("Volume", FloatType(), False),
         StructField("Symbol", FloatType(), False),
         StructField("Security Name", FloatType(), False)
-
+        
     ])
     # Read data from CSV into the DataFrame using the existing schema
     stock_df = spark.read.csv(input_file, header=True, schema=existing_schema)
@@ -54,7 +60,4 @@ def preprocessing_data(spark, input_file, output_dir, symbol_mapping):
     stock_df.write.parquet(output_file, header=True, mode="over")
 
 
-if __name__ == "__main__":
-
-
-    input_dir = "../data/stocks_etfs/A.csv"
+def preprocessing_data(input_file):

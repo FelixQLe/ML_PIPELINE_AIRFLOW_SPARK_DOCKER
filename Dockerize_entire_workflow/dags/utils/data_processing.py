@@ -18,4 +18,4 @@ def data_processing(batch_number:int):
     temp = list(map(add_name, preprocessing_list[batch_number]))
 
 
-print(preprocessing_list)
+#print(preprocessing_list)
