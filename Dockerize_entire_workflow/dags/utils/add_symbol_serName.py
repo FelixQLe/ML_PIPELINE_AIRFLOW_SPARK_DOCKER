@@ -16,7 +16,7 @@ features = ['Symbol', 'Security Name', 'Date', 'Open', 'High', 'Low', 'Close', '
 path = '../data/processed_stocks_etfs/'
 
 def add_name(file):
-    name = os.path.splitext(os.path.basename(input_file))[0]
+    name = os.path.splitext(os.path.basename(file))[0]
     df = pd.read_csv(file)
     df['Symbol'] = name
     df['Security Name'] = df['Symbol'].map(symbol_mapping)
