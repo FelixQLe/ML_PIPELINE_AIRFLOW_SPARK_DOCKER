@@ -1,22 +1,24 @@
-from pyspark.sql import SparkSession
-from pyspark import SparkContext, SparkConf
-from pyspark.sql.types import StructType, StructField, StringType, FloatType, IntegerType
-from pyspark.sql.functions import input_file_name, lit, col, isnull
-from pyspark.sql import functions as F
+import pandas as pd
+from save_parquet import save_parquet
 
-#Create a spark Context class, with custom config
-conf = SparkConf()
-conf.set('spark.default.parallelism', 700)
-conf.set('spark.sql.shuffle.partitions', 700)
-conf.set('spark.driver.memory', '30g')
-conf.set('spark.driver.cores', 8)
-conf.set('spark.executor.cores', 8)
-conf.set('spark.executor.memory', '30g')
-sc = SparkContext.getOrCreate(conf)
+#read metal symbol files
+metal_symbol = pd.read_csv('./data/symbols_valid_meta.csv')
+metal_symbol = metal_symbol[['Symbol', 'Security Name']]
+#correct some wrong spelling, coresponding to Stock file name
+metal_symbol['Symbol'] = metal_symbol['Symbol'].str.replace('$', '-',regex=False)
+metal_symbol['Symbol'] = metal_symbol['Symbol'].str.replace('.V', '',regex=False)
+#creat mapping dictionary
+symbol_mapping = metal_symbol.set_index('Symbol').to_dict()['Security Name']
+#retain features columns
+features = ['Symbol', 'Security Name', 'Date', 'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']
+#path to save processed dataset
+path = './data/processed_stocks_etfs/'
 
-## Initialize SparkSession
-spark = SparkSession.builder.master('local[*]').\
-                config('spark.sql.debug.maxToStringFields', '100').\
-                appName("ETFs Spark Airflow Docker").getOrCreate()
-
-
+def add_name(file):
+    name = file.stem
+    df = pd.read_csv(file)
+    df['Symbol'] = name
+    df['Security Name'] = df['Symbol'].map(symbol_mapping)
+    #df.name = name
+    #return df
+    save_parquet(df[features], name, path)
