@@ -81,8 +81,11 @@ def preprocessing_data():
     #temp = list(map(add_sym_sec_name, preprocessing_list))
 
 
-stocks_path = '../data/stocks_etfs/'
+stocks_path = '/Users/hople/working_folder/Bootcamp_practices/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/Dockerize_entire_workflow/dags/data/stocks_etfs/'
 n_processor = cpu_count()
 #preprocessing_data()
 preprocessing_list = load_file(n_processor, stocks_path, 'csv')
 print(preprocessing_list)
+
+import pandas as pd
+#pd.read_csv('/Users/hople/working_folder/Bootcamp_practices/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/Dockerize_entire_workflow/dags/data/stocks_etfs/A.csv')
