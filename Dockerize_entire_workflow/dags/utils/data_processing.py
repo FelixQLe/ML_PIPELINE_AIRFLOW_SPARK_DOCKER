@@ -1,4 +1,4 @@
-#from add_symbol_serName import add_name
+from add_symbol_serName import add_name
 from load_files import load_file
 from multiprocessing import cpu_count
 
@@ -18,4 +18,4 @@ def data_processing(batch_number:int):
     temp = list(map(add_name, preprocessing_list[batch_number]))
 
 
-#print(preprocessing_list)
+print(preprocessing_list)
