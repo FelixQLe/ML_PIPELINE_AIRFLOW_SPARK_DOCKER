@@ -1,4 +1,5 @@
 from pathlib import Path
+import numpy as np
 
 def load_file(n, path_file, file_format, press='*.'):
     """
@@ -8,4 +9,4 @@ def load_file(n, path_file, file_format, press='*.'):
     """
     n = int(n)
     ls_1 = list(Path(path_file).glob(press+file_format)) 
-    return ls_1 #list(map(list,np.array_split(ls_1, n)))
+    return list(map(list,np.array_split(ls_1, n)))

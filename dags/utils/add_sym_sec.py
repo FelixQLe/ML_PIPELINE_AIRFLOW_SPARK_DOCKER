@@ -66,15 +66,16 @@ def add_sym_sec_name(input_file):
     output_file = os.path.join(processed_stocks_dir, f"{symbol_name}_preprocessed.parquet")
     stock_df.write.mode("overwrite").parquet(output_file)
 
+#list of loaded csv files will split into n_processor, for parralezation process in Airflow
+n_processor = cpu_count()
+#get batches of data
+preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
 
 def preprocessing_data():
     '''
     Takes batch number as input
     Map function add_sym_sec_name for every dataframe in batch number in preprocessing_list
     '''
-    #list of loaded csv files will split into n_processor, for parralezation process in Airflow
-    n_processor = cpu_count()
-    #get batches of data
-    preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
-    list(map(add_sym_sec_name, preprocessing_list))
+    
+    #list(map(add_sym_sec_name, preprocessing_list))
 
