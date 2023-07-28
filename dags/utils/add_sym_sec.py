@@ -26,35 +26,32 @@ spark = SparkSession.builder.master('local[*]').\
                 config('spark.sql.debug.maxToStringFields', '100').\
                 appName("ETFs Spark Airflow Docker").getOrCreate()
 
+#Mapping dict
+meta_symbol = spark.read.csv("dags/data/symbols_valid_meta.csv", header=True)
+symbol_mapping = meta_symbol.select("Symbol", "Security Name").rdd.collectAsMap()
 
 #stock dir
 stocks_dir = "dags/data/stocks_etfs"
 #processed data dir
 processed_stocks_dir = "dags/data/processed_stocks_etfs"
 
+#Define Schema for the data
+existing_schema = StructType([
+    StructField("Date", StringType(), False),
+    StructField("Open", FloatType(), False),
+    StructField("High", FloatType(), False),
+    StructField("Low", FloatType(), False),
+    StructField("Close", FloatType(), False),
+    StructField("Adj Close", FloatType(), False),
+    StructField("Volume", FloatType(), False),
+    StructField("Symbol", FloatType(), False),
+    StructField("Security Name", FloatType(), False)
+])
+
 def add_sym_sec_name(input_file):
     """
     Function adds Symbol and Security Name to stock file
     """
-    #Mapping dict
-    meta_symbol = spark.read.csv("dags/data/symbols_valid_meta.csv", header=True)
-    symbol_mapping = meta_symbol.select("Symbol", "Security Name").rdd.collectAsMap()
-    print(symbol_mapping)
-
-    #Define Schema for the data
-    existing_schema = StructType([
-        StructField("Date", StringType(), False),
-        StructField("Open", FloatType(), False),
-        StructField("High", FloatType(), False),
-        StructField("Low", FloatType(), False),
-        StructField("Close", FloatType(), False),
-        StructField("Adj Close", FloatType(), False),
-        StructField("Volume", FloatType(), False),
-        StructField("Symbol", FloatType(), False),
-        StructField("Security Name", FloatType(), False)
-
-    ])
-
     # Read data from CSV into the DataFrame using the existing schema
     stock_df = spark.read.csv(str(input_file), header=True, schema=existing_schema)
 
@@ -79,8 +76,5 @@ def preprocessing_data():
     n_processor = cpu_count()
     #get batches of data
     preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
-    temp = list(map(add_sym_sec_name, preprocessing_list))
-
-preprocessing_data()
-
+    list(map(add_sym_sec_name, preprocessing_list))
 
