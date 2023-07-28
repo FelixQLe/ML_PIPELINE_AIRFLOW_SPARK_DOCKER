@@ -78,11 +78,9 @@ def preprocessing_data():
     n_processor = cpu_count()
     #get batches of data
     preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
-    temp = list(map(add_sym_sec_name, preprocessing_list))
+    #temp = list(map(add_sym_sec_name, preprocessing_list))
 
-n_processor = cpu_count()
-#preprocessing_data()
-preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
-print(preprocessing_list)
+
+preprocessing_data()
 
 
