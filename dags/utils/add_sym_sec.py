@@ -37,7 +37,7 @@ def add_sym_sec_name(input_file):
     Function adds Symbol and Security Name to stock file
     """
     #Mapping dict
-    meta_symbol = spark.read.csv("../data/symbols_valid_meta.csv", header=True)
+    meta_symbol = spark.read.csv("dags/data/symbols_valid_meta.csv", header=True)
     symbol_mapping = meta_symbol.select("Symbol", "Security Name").rdd.collectAsMap()
 
     #Define Schema for the data
@@ -78,7 +78,7 @@ def preprocessing_data():
     n_processor = cpu_count()
     #get batches of data
     preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
-    #temp = list(map(add_sym_sec_name, preprocessing_list))
+    temp = list(map(add_sym_sec_name, preprocessing_list))
 
 
 preprocessing_data()
