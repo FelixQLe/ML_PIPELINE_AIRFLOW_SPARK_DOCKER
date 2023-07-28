@@ -1,8 +1,8 @@
-from add_symbol_serName import add_name
+#from add_symbol_serName import add_name
 from load_files import load_file
 from multiprocessing import cpu_count
 
-stocks_path = './data/stocks_etfs/'
+stocks_path = '/data/stocks_etfs/'
 
 #list of loaded csv files will split into n_processor, for parralezation process
 n_processor = cpu_count()
@@ -15,7 +15,8 @@ def data_processing(batch_number:int):
     Takes batch number as input
     Map function add_name for every dataframe in batch number in preprocessing_list
     '''
-    temp = list(map(add_name, preprocessing_list[batch_number]))
+    #temp = list(map(add_name, preprocessing_list[batch_number]))
 
+import pandas as pd
 
-print(preprocessing_list)
+print(pd.read_csv('../data/stocks_etfs/A.csv'))
