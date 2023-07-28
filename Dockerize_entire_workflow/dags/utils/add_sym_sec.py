@@ -80,7 +80,7 @@ def preprocessing_data():
     print(preprocessing_list)
     #temp = list(map(add_sym_sec_name, preprocessing_list))
 
-
+stocks_dir = ""
 stocks_path = '/Users/hople/working_folder/Bootcamp_practices/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/Dockerize_entire_workflow/dags/data/stocks_etfs/'
 n_processor = cpu_count()
 #preprocessing_data()
