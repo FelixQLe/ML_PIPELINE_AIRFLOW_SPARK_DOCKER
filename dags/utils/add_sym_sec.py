@@ -56,7 +56,7 @@ def add_sym_sec_name(input_file):
     ])
 
     # Read data from CSV into the DataFrame using the existing schema
-    stock_df = spark.read.csv(input_file, header=True, schema=existing_schema)
+    stock_df = spark.read.csv(str(input_file), header=True, schema=existing_schema)
 
     # Get Symbol name from input file
     symbol_name = os.path.splitext(os.path.basename(input_file))[0]
@@ -67,7 +67,7 @@ def add_sym_sec_name(input_file):
 
     # Save the preprocessed data to a parquet file
     output_file = os.path.join(processed_stocks_dir, f"{symbol_name}_preprocessed.parquet")
-    stock_df.write.parquet(output_file, header=True, mode="overwrite")
+    stock_df.write.mode("overwrite").parquet(output_file)
 
 
 def preprocessing_data():
@@ -79,8 +79,7 @@ def preprocessing_data():
     n_processor = cpu_count()
     #get batches of data
     preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
-    temp = map(add_sym_sec_name, preprocessing_list)
-    print(preprocessing_list)
+    temp = list(map(add_sym_sec_name, preprocessing_list))
 
 preprocessing_data()
 
