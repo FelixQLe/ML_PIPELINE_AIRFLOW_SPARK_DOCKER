@@ -3,7 +3,7 @@ from pyspark.sql.types import StructType, StructField, StringType, FloatType
 from pyspark.sql import functions as F
 from multiprocessing import cpu_count
 from load_files import load_file #function load files into batches
-#from SparkSession import initilize_sparksession
+#from sparksession import initilize_sparksession
 
 #stock dir
 stocks_dir = "dags/data/stocks_etfs"
@@ -17,15 +17,15 @@ preprocessing_list = load_file(n_processor, stocks_dir, 'csv')
 
 #Define Schema for the data
 existing_schema = StructType([
-    StructField("Date", StringType(), False),
-    StructField("Open", FloatType(), False),
-    StructField("High", FloatType(), False),
-    StructField("Low", FloatType(), False),
-    StructField("Close", FloatType(), False),
-    StructField("Adj Close", FloatType(), False),
-    StructField("Volume", FloatType(), False),
-    StructField("Symbol", FloatType(), False),
-    StructField("Security Name", FloatType(), False)
+    StructField("Date", StringType(), True),
+    StructField("Open", FloatType(), True),
+    StructField("High", FloatType(), True),
+    StructField("Low", FloatType(), True),
+    StructField("Close", FloatType(), True),
+    StructField("Adj Close", FloatType(), True),
+    StructField("Volume", FloatType(), True),
+    StructField("Symbol", FloatType(), True),
+    StructField("Security Name", FloatType(), True)
 ])
 #spark = initilize_sparksession()
 def add_sym_sec_name(input_file, spark):
