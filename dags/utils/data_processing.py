@@ -78,4 +78,3 @@ def preprocessing_data(batch_number:int):
     Map function add_sym_sec_name for every dataframe in batch number in preprocessing_list
     '''
     list(map(add_sym_sec_name, preprocessing_list[batch_number]))
-
