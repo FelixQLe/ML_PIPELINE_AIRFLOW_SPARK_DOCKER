@@ -53,7 +53,7 @@ existing_schema = StructType([
     StructField("Security Name", FloatType(), False)
 ])
 
-def add_sym_sec_name(input_file):
+def add_sym_sec_name(input_file, spark):
     """
     Function adds Symbol and Security Name to stock file
     """
@@ -71,10 +71,19 @@ def add_sym_sec_name(input_file):
     output_file = os.path.join(processed_stocks_dir, f"{symbol_name}_preprocessed.parquet")
     stock_df.write.mode("overwrite").option("compression", "snappy").parquet(output_file)
 
+def duplicate_n_times(input_list, n):
+    # Using list comprehension to duplicate each item 'n' times
+    duplicated_list = [item for item in input_list for _ in range(n)]
+    return duplicated_list
 
-def preprocessing_data(batch_number:int):
+
+def preprocessing_data(batch_number:int, spark):
     '''
     Takes batch number as input
     Map function add_sym_sec_name for every dataframe in batch number in preprocessing_list
     '''
-    list(map(add_sym_sec_name, preprocessing_list[batch_number]))
+    list_spark = duplicate_n_times([spark], len(preprocessing_list[batch_number])) #list of initializing SparkSesssion for mapping
+    list(map(add_sym_sec_name, preprocessing_list[batch_number], list_spark))
+
+
+preprocessing_data(0)
