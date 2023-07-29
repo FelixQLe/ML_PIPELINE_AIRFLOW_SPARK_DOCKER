@@ -1,34 +1,10 @@
-from pyspark.sql import SparkSession
-from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import StructType, StructField, StringType, FloatType
 from pyspark.sql.functions import lit
 from pyspark.sql import functions as F
 import os
 from multiprocessing import cpu_count
 from load_files import load_file #function load files into batches
-
-#Create a spark Context class, with custom config to optimize the performance
-conf = SparkConf()
-#conf.set('spark.default.parallelism', 700)
-#conf.set('spark.sql.shuffle.partitions', 700)
-conf.set('spark.sql.adaptive.coalescePartitions.initialPartitionNum', 24)
-conf.set('spark.sql.adaptive.coalescePartitions.parallelismFirst', 'false')
-conf.set('spark.sql.files.minPartitionNum', 1)
-conf.set('spark.sql.files.maxPartitionBytes', '500mb')
-conf.set('spark.driver.memory', '30g')
-conf.set('spark.driver.cores', 8)
-conf.set('spark.executor.cores', 8)
-conf.set('spark.executor.memory', '30g')
-sc = SparkContext.getOrCreate(conf)
-
-## Initialize SparkSession
-spark = SparkSession.builder.master('local[*]').\
-                config('spark.sql.debug.maxToStringFields', '100').\
-                appName("ETFs Spark Airflow Docker").getOrCreate()
-
-#Mapping dict
-meta_symbol = spark.read.csv("dags/data/symbols_valid_meta.csv", header=True)
-symbol_mapping = meta_symbol.select("Symbol", "Security Name").rdd.collectAsMap()
+#from SparkSession import initilize_sparksession
 
 #stock dir
 stocks_dir = "dags/data/stocks_etfs"
@@ -52,11 +28,15 @@ existing_schema = StructType([
     StructField("Symbol", FloatType(), False),
     StructField("Security Name", FloatType(), False)
 ])
-
+#spark = initilize_sparksession()
 def add_sym_sec_name(input_file, spark):
     """
     Function adds Symbol and Security Name to stock file
     """
+    #Mapping dict
+    meta_symbol = spark.read.csv("dags/data/symbols_valid_meta.csv", header=True)
+    symbol_mapping = meta_symbol.select("Symbol", "Security Name").rdd.collectAsMap()
+
     # Read data from CSV into the DataFrame using the existing schema
     stock_df = spark.read.csv(str(input_file), header=True, schema=existing_schema)
 
@@ -77,13 +57,13 @@ def duplicate_n_times(input_list, n):
     return duplicated_list
 
 
-def preprocessing_data(batch_number:int, spark):
+def preprocessing_data(batch_number:int, sparksession):
     '''
     Takes batch number as input
     Map function add_sym_sec_name for every dataframe in batch number in preprocessing_list
     '''
-    list_spark = duplicate_n_times([spark], len(preprocessing_list[batch_number])) #list of initializing SparkSesssion for mapping
+    list_spark = duplicate_n_times([sparksession], len(preprocessing_list[batch_number])) #list of initializing SparkSesssion for mapping
     list(map(add_sym_sec_name, preprocessing_list[batch_number], list_spark))
 
 
-preprocessing_data(0)
+#preprocessing_data(0, spark)
