@@ -8,6 +8,7 @@ conf = SparkConf()
 #conf.set('spark.sql.shuffle.partitions', 700)
 conf.set('spark.sql.adaptive.coalescePartitions.initialPartitionNum', 24)
 conf.set('spark.sql.adaptive.coalescePartitions.parallelismFirst', 'false')
+conf.set('spark.sql.adaptive.enabled', 'false')
 conf.set('spark.sql.files.minPartitionNum', 1)
 conf.set('spark.sql.files.maxPartitionBytes', '500mb')
 conf.set('spark.driver.memory', '30g')
@@ -20,6 +21,5 @@ def initilize_sparksession():
 
     ## Initialize SparkSession
     return SparkSession.builder.master('local[*]').\
-                    config('spark.sql.debug.maxToStringFields', '100').\
                     appName("ETFs Spark Airflow Docker").getOrCreate()
     
