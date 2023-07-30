@@ -1,9 +1,8 @@
 from pyspark.sql.types import StructType, StructField, StringType, FloatType
-#from pyspark.sql.functions import lit
 from pyspark.sql import functions as F
 from multiprocessing import cpu_count
 from load_files import load_file #function load files into batches
-#from sparksession import initilize_sparksession
+from sparksession import initilize_sparksession
 
 #stock dir
 stocks_dir = "dags/data/stocks_etfs"
@@ -27,7 +26,7 @@ existing_schema = StructType([
     StructField("Symbol", FloatType(), True),
     StructField("Security Name", FloatType(), True)
 ])
-#spark = initilize_sparksession()
+spark = initilize_sparksession()
 def add_sym_sec_name(input_file, spark):
     """
     Function adds Symbol and Security Name to stock file
@@ -46,8 +45,11 @@ def add_sym_sec_name(input_file, spark):
     stock_df = stock_df.withColumn("Symbol", F.lit(symbol_name))
     stock_df = stock_df.withColumn("Security Name", F.lit(symbol_mapping.get(symbol_name)))
 
+    #change column order
+    columns = ['Symbol', 'Security Name', 'Date', 'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']
+
     # Save the preprocessed data to a parquet file
-    stock_df.write.mode("overwrite").option("compression", "snappy").parquet(processed_stocks_dir+"/"+symbol_name+"_preprocessed.parquet")
+    stock_df.select(columns).write.mode("overwrite").option("compression", "snappy").parquet(processed_stocks_dir+"/"+symbol_name+"_preprocessed.parquet")
 
 def duplicate_n_times(input_list, n):
     # Using list comprehension to duplicate each item 'n' times
@@ -63,5 +65,5 @@ def preprocessing_data(batch_number:int, sparksession):
     list_spark = duplicate_n_times([sparksession], len(preprocessing_list[batch_number])) #list of initializing SparkSesssion for mapping working
     list(map(add_sym_sec_name, preprocessing_list[batch_number], list_spark))
 
-#for i in range(8):
-#    preprocessing_data(i, spark)
+for i in range(8):
+    preprocessing_data(i, spark)

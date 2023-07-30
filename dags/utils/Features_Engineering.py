@@ -1,11 +1,16 @@
-from pyspark.sql import SparkSession
+#####
+from pyspark.sql.window import Window
 from pyspark.sql.types import StructType, StructField, StringType, FloatType, DateType
+from pyspark.sql import functions as F
 from sparksession import initilize_sparksession
+
 # Create a SparkSession
 spark = initilize_sparksession()
 
 # Define the schema for the Parquet file
 custom_schema = StructType([
+    StructField("Symbol", StringType(), True),
+    StructField("Security Name", StringType(), True),
     StructField("Date", DateType(), True),
     StructField("Open", FloatType(), True),
     StructField("High", FloatType(), True),
@@ -13,8 +18,6 @@ custom_schema = StructType([
     StructField("Close", FloatType(), True),
     StructField("Adj Close", FloatType(), True),
     StructField("Volume", FloatType(), True),
-    StructField("Symbol", StringType(), True),
-    StructField("Security Name", StringType(), True),
     StructField("vol_moving_avg", FloatType(), True),
     StructField("adj_close_rolling_med", FloatType(), True)
 ])
