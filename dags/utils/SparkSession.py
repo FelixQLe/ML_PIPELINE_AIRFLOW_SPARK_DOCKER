@@ -4,13 +4,12 @@ from pyspark import SparkContext, SparkConf
 
 #Create a spark Context class, with custom config to optimize the performance
 conf = SparkConf()
-conf.set('spark.default.parallelism', 24)
-conf.set('spark.sql.shuffle.partitions', 24)
-conf.set('spark.sql.adaptive.coalescePartitions.initialPartitionNum', 24)
+conf.set('spark.default.parallelism', 8)
+conf.set('spark.sql.shuffle.partitions', 8)
+conf.set('spark.sql.adaptive.coalescePartitions.initialPartitionNum', 8)
 conf.set('spark.sql.adaptive.coalescePartitions.parallelismFirst', 'false')
-conf.set('spark.sql.adaptive.enabled', 'false')
-conf.set('spark.sql.files.minPartitionNum', 8)
-conf.set('spark.sql.files.maxPartitionBytes', '1000mb')
+conf.set('spark.sql.files.minPartitionNum', 2)
+conf.set('spark.sql.files.maxPartitionBytes', '500mb')
 conf.set('spark.driver.memory', '30g')
 conf.set('spark.driver.cores', 8)
 conf.set('spark.executor.cores', 8)
