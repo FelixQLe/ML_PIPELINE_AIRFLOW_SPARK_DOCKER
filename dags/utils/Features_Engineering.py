@@ -7,37 +7,25 @@ from sparksession import initilize_sparksession
 # Create a SparkSession
 spark = initilize_sparksession()
 
-# Define the schema for the Parquet file
-custom_schema = StructType([
-    StructField("Symbol", StringType(), True),
-    StructField("Security Name", StringType(), True),
-    StructField("Date", DateType(), True),
-    StructField("Open", FloatType(), True),
-    StructField("High", FloatType(), True),
-    StructField("Low", FloatType(), True),
-    StructField("Close", FloatType(), True),
-    StructField("Adj Close", FloatType(), True),
-    StructField("Volume", FloatType(), True),
-    StructField("vol_moving_avg", FloatType(), True),
-    StructField("adj_close_rolling_med", FloatType(), True)
-])
-
 # Path to save processed dataset
 featured_stocks_path = 'dags/data/featuresAdded_stocks_etfs/'
 
-def adding_features(file):
-    name = file.stem
-    df = spark.read.parquet(file)
+def adding_features(input_file, spark):
+    name = input_file.stem
+    processed_stock = spark.read.parquet(input_file)
 
-    # Calculate volume moving average using Window function
-    window_spec = Window.orderBy(F.col('Date')).rowsBetween(-29, 0)
-    df = df.withColumn('vol_moving_avg', F.avg('Volume').over(window_spec))
+    # Calculate volume moving average using Window function for the last 30 days, including the current row
+    w_date = Window.partitionBy(F.lit(0)).orderBy(F.col('Date')).rowsBetween(-29, 0)
+    processed_stock = processed_stock.withColumn('vol_moving_avg', F.avg('Volume').over(w_date))
+    processed_stock = processed_stock.withColumn('vol_moving_avg', F.round('vol_moving_avg', 0))
 
-    # Calculate adjusted close rolling median using Window function
-    df = df.withColumn('adj_close_rolling_med', F.expr('percentile_approx(`Adj Close`, 0.5) OVER (ORDER BY Date ROWS BETWEEN 29 PRECEDING AND CURRENT ROW)'))
+    #drop the first 30 days
+    processed_stock = processed_stock.withColumn("counter", F.monotonically_increasing_id())
+    w_counter = Window.partitionBy(F.lit(0)).orderBy("counter")
+    processed_stock = processed_stock.withColumn("index", F.row_number().over(w_counter))
+    processed_stock = processed_stock.filter(F.col("index") >= 30)
+    processed_stock = processed_stock.drop("counter", "index")
 
-    # Drop rows with null values
-    df = df.dropna(subset=features)
 
     # Save the DataFrame as a Parquet file
     output_file = f"{featured_stocks_path}/{name}.parquet"
