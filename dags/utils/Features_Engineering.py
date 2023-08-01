@@ -11,7 +11,11 @@ spark = initilize_sparksession()
 featured_stocks_path = 'dags/data/featuresAdded_stocks_etfs/'
 
 def adding_features(input_file, spark):
-    
+    """
+    Function take input 
+    spark :: sparksession and 
+    input_file :: add two features, volume moving average and median to the input file
+    """
     name = input_file.stem
     processed_stock = spark.read.parquet(input_file)
 
@@ -30,8 +34,7 @@ def adding_features(input_file, spark):
     featured_stock = featured_stock.drop("counter", "index")
 
     # Save the DataFrame as a Parquet file
-    output_file = f"{featured_stocks_path}/{name}.parquet"
-    df.select(features).write.parquet(output_file, mode='overwrite', compression='snappy')
+    output_file = f"{featured_stocks_path}/{name}_featured.parquet"
+    featured_stock.write.mode("overwrite").option("compression", "snappy").parquet(output_file)
 
-# Note: replace 'file' with the actual path to your Parquet file
-# e.g., adding_features(Path('/path/to/your_parquet_file.parquet'))
+def 
