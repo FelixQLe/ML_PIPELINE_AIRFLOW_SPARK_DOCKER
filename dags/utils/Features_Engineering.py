@@ -3,12 +3,21 @@ from pyspark.sql.window import Window
 from pyspark.sql.types import StructType, StructField, StringType, FloatType, DateType
 from pyspark.sql import functions as F
 from sparksession import initilize_sparksession
+from load_files import load_file
+from multiprocessing import cpu_count
 
 # Create a SparkSession
 spark = initilize_sparksession()
 
-# Path to save processed dataset
-featured_stocks_path = 'dags/data/featuresAdded_stocks_etfs/'
+#processed data dir
+processed_stocks_dir = "dags/data/processed_stocks_etfs"
+#featured data dir
+featured_stocks_dir = 'dags/data/featuresAdded_stocks_etfs/'
+
+#list of loaded csv files will split into n_processor batches, for parralezation data processing in Airflow
+n_processor = cpu_count()
+#get batches of data
+preprocessing_list = load_file(n_processor, processed_stocks_dir, 'parquet')
 
 def adding_features(input_file, spark):
     """
@@ -34,7 +43,20 @@ def adding_features(input_file, spark):
     featured_stock = featured_stock.drop("counter", "index")
 
     # Save the DataFrame as a Parquet file
-    output_file = f"{featured_stocks_path}/{name}_featured.parquet"
+    output_file = f"{featured_stocks_dir}/{name}_featured.parquet"
     featured_stock.write.mode("overwrite").option("compression", "snappy").parquet(output_file)
 
-def 
+def duplicate_n_times(input_list, n):
+    # Using list comprehension to duplicate each item 'n' times
+    duplicated_list = [item for item in input_list for _ in range(n)]
+    return duplicated_list
+
+
+def preprocessing_data(batch_number:int, sparksession):
+    '''
+    Takes batch number as input
+    Map function add_sym_sec_name for every dataframe in batch number in preprocessing_list
+    '''
+    list_spark = [spark]*len(preporcessing_list[])
+    #list_spark = duplicate_n_times([sparksession], len(preprocessing_list[batch_number])) #list of initializing SparkSesssion for mapping working
+    list(map(add_sym_sec_name, preprocessing_list[batch_number], list_spark))
