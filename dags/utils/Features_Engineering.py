@@ -11,21 +11,23 @@ spark = initilize_sparksession()
 featured_stocks_path = 'dags/data/featuresAdded_stocks_etfs/'
 
 def adding_features(input_file, spark):
+    
     name = input_file.stem
     processed_stock = spark.read.parquet(input_file)
 
     # Calculate volume moving average using Window function for the last 30 days, including the current row
     w_date = Window.partitionBy(F.lit(0)).orderBy(F.col('Date')).rowsBetween(-29, 0)
-    processed_stock = processed_stock.withColumn('vol_moving_avg', F.avg('Volume').over(w_date))
+    processed_stock = processed_stock.withColumn('vol_moving_avg', F.mean('Volume').over(w_date))
     processed_stock = processed_stock.withColumn('vol_moving_avg', F.round('vol_moving_avg', 0))
-
+    # Calculate the rolling median for the 'Volume' column over the last 30 days
+    processed_stock = processed_stock.withColumn('adj_close_rolling_med', F.expr('percentile(Volume, 0.5)').over(w_date))
+    processed_stock = processed_stock.withColumn('adj_close_rolling_med', F.round('adj_close_rolling_med', 0))
     #drop the first 30 days
-    processed_stock = processed_stock.withColumn("counter", F.monotonically_increasing_id())
+    featured_stock = processed_stock.withColumn("counter", F.monotonically_increasing_id())
     w_counter = Window.partitionBy(F.lit(0)).orderBy("counter")
-    processed_stock = processed_stock.withColumn("index", F.row_number().over(w_counter))
-    processed_stock = processed_stock.filter(F.col("index") >= 30)
-    processed_stock = processed_stock.drop("counter", "index")
-
+    featured_stock = featured_stock.withColumn("index", F.row_number().over(w_counter))
+    featured_stock = featured_stock.filter(F.col("index") >= 30)
+    featured_stock = featured_stock.drop("counter", "index")
 
     # Save the DataFrame as a Parquet file
     output_file = f"{featured_stocks_path}/{name}.parquet"
