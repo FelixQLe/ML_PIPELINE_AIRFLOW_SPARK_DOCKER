@@ -29,7 +29,6 @@ def create_connection_task():
         password=password,
         schema=schema
     )
-
     # Add the Connection to the Airflow metadata database
     session = settings.Session()
     session.add(conn)

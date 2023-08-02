@@ -22,3 +22,4 @@ def logging_grid_search(df, log_name, level='INFO'):
     
     #write to csv file
     conc_df.to_csv(path_file+log_name, index=False)
+    

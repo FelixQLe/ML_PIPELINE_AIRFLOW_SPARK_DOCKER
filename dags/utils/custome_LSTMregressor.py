@@ -7,7 +7,7 @@ class LSTMRegressor(BaseEstimator, RegressorMixin):
     """
     custome LSTM to take params_grid and try all params on LTSM by using GridSerchCV
     example how to use: GridSearchCV(estimator=LSTMRegressor(), param_grid=param_grid, cv=3, scoring='neg_mean_squared_error', verbose=2, n_jobs=-1)
-    """
+        """
     def __init__(self, num_units=32, dropout=0.2, batch_size=32, epochs=50, learning_rate=0.05):
         self.num_units = num_units
         self.dropout = dropout

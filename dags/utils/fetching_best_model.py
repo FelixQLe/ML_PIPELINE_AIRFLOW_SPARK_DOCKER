@@ -10,7 +10,6 @@ from utils.split_data import split_data
 from utils.grid_search import grid_search
 from utils.load_files import load_file
 
-
 # params for Grid_search
 param_grid = {
     'num_units': [32],
@@ -18,7 +17,6 @@ param_grid = {
     'batch_size': [128],
     'epochs': [50],
     'learning_rate': [0.0001]}
-
 
 def best_model_search():
     df = load_file(1, 'dags/data/featuresAdded_stocks_etfs/', "IP.parquet", press="")
