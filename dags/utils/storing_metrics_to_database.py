@@ -13,3 +13,5 @@ def track_experiments_info():
     df = pd.read_csv(path_to_metrics_df).iloc[-2:-1,:]
     engine = create_engine(db_engine)
     df.to_sql(table_name, engine, schema=db_schema, if_exists='append', index=False)
+
+
