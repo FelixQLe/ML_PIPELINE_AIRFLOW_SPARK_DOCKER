@@ -26,7 +26,7 @@ def adding_features(input_file, spark):
     input_file :: add two features, volume moving average and median to the input file
     """
     name = input_file.stem
-    processed_stock = spark.read.parquet(input_file)
+    processed_stock = spark.read.parquet(str(input_file))
 
     # Calculate volume moving average using Window function for the last 30 days, including the current row
     w_date = Window.partitionBy(F.lit(0)).orderBy(F.col('Date')).rowsBetween(-29, 0)
@@ -46,17 +46,14 @@ def adding_features(input_file, spark):
     output_file = f"{featured_stocks_dir}/{name}_featured.parquet"
     featured_stock.write.mode("overwrite").option("compression", "snappy").parquet(output_file)
 
-def duplicate_n_times(input_list, n):
-    # Using list comprehension to duplicate each item 'n' times
-    duplicated_list = [item for item in input_list for _ in range(n)]
-    return duplicated_list
-
-
-def preprocessing_data(batch_number:int, sparksession):
+def featuring_data(batch_number:int, sparksession):
     '''
     Takes batch number as input
     Map function add_sym_sec_name for every dataframe in batch number in preprocessing_list
     '''
-    list_spark = [spark]*len(preporcessing_list[])
-    #list_spark = duplicate_n_times([sparksession], len(preprocessing_list[batch_number])) #list of initializing SparkSesssion for mapping working
-    list(map(add_sym_sec_name, preprocessing_list[batch_number], list_spark))
+    list_spark = [sparksession]*len(preprocessing_list[batch_number]) #list of initializing SparkSesssion for mapping working
+    list(map(adding_features, preprocessing_list[batch_number], list_spark))
+
+
+for i in range(8):
+    featuring_data(i, spark)
