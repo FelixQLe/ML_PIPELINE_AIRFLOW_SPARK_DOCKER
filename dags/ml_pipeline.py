@@ -4,8 +4,8 @@ from airflow.operators.python import PythonOperator
 from multiprocessing import cpu_count
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.hooks.postgres_hook import PostgresHook
-from utils.data_processing import data_processing
-from utils.feature_engineering import feature_engineering
+from utils.data_processing import preprocessing_data
+from utils.features_engineering import featuring_data
 from utils.fetching_best_model import best_model_search
 from utils.storing_metrics_to_database import track_experiments_info
 from utils.create_connection import create_connection_task
