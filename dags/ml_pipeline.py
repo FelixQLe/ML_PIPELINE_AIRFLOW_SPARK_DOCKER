@@ -40,17 +40,18 @@ creating_ml_metrics_table_task = PostgresOperator(
                                         dag=dag
                                         )
 
-machine_learning_task = PythonOperator(
-                                task_id='machine_learning_task',
-                                python_callable=best_model_search,
-                                dag=dag,
-                                )
 
 storing_metrics_to_database_task = PythonOperator(
                                             task_id='storing_metrics_to_database_task',
                                             python_callable=track_experiments_info,
                                             dag=dag
                                             )
+
+machine_learning_task = PythonOperator(
+                                task_id='machine_learning_task',
+                                python_callable=best_model_search,
+                                dag=dag,
+                                )
 
 collecting_all_metrics = PostgresOperator(
                                     task_id="collecting_all_metrics",
@@ -64,7 +65,7 @@ featuring_tasks = []
 for n in range(n_processor):
     task_id = f'data_processing_task{n}'
     task = PythonOperator(task_id=task_id,
-                          python_callable=data_processing,
+                          python_callable=,
                           op_kwargs={'batch_number': n},
                           dag=dag,
                         )
