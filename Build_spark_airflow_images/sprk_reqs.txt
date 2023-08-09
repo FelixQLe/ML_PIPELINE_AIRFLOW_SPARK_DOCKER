@@ -1,7 +1,0 @@
-pandas
-joblib
-tensorflow
-skikit-learn
-scipy
-numpy
-sqlalchemy

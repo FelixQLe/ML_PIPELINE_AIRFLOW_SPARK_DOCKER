@@ -1,8 +1,0 @@
-FROM bitnami/spark:3
-
-USER root
-
-COPY ./dags/spark_etl_script_docker.py /opt/bitnami/spark
-
-COPY ./sprk_reqs.txt /
-RUN pip install -r /sprk_reqs.txt

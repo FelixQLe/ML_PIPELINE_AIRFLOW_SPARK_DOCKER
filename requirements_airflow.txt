@@ -1,0 +1,2 @@
+sqlalchemy
+apache-airflow-providers-apache-spark

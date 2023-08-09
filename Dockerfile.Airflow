@@ -1,0 +1,56 @@
+# Base image
+FROM apache/airflow:slim-2.6.1-python3.10
+
+USER root
+
+# Install OpenJDK-11
+RUN apt update && \
+    apt-get install -y openjdk-11-jdk && \
+    apt-get install -y ant && \
+    apt-get clean;
+
+# Set JAVA_HOME
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
+RUN export JAVA_HOME
+#grant USER root to create folder
+#USER root
+# Avoid warnings by switching to noninteractive
+#ENV DEBIAN_FRONTEND=noninteractive
+# Install additional packages
+#    postgresql-client \
+#    postgresql \
+RUN apt-get update && apt-get install -y \
+    && apt-get autoremove -yqq --purge \
+    && apt-get clean
+
+
+USER airflow
+# Set environment variables
+#ENV AIRFLOW_HOME=/opt/airflow
+#ENV DAGS_DIR=/opt/airflow/dags
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog
+
+# Install Python packages
+RUN pip install --no-cache-dir \
+    celery \
+    redis \
+    tensorflow \
+    scikit-learn \
+    joblib \
+    && pip install --no-cache-dir \
+    apache-airflow-providers-postgres \
+    apache-airflow-providers-datadog \
+    apache-airflow-providers-datadog[ci] \
+    && pip install --no-cache-dir -U pip \
+    && pip install --no-cache-dir \
+    pandas \ 
+    numpy \
+    pyarrow
+
+#USER airflow
+
+COPY ./requirements_airflow.txt /
+RUN pip install -r /requirements_airflow.txt
+
+COPY --chown=airflow:root ./dags /opt/airflow/dags
