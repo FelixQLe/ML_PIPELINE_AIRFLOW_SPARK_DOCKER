@@ -10,7 +10,7 @@ USER root
 #    apt-get clean;
 
 # Set JAVA_HOME
-ENV JAVA_HOME /Library/Java/JavaVirtualMachines/jdk-20.jdk/Contents/Home
+ENV JAVA_HOME /Library/Java/JavaVirtualMachines/jdk-20.jdk/
 RUN export JAVA_HOME
 #grant USER root to create folder
 #USER root
