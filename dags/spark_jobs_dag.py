@@ -19,7 +19,7 @@ spark_dag = DAG(
 )
 
 Extract = SparkSubmitOperator(
-		application = "/opt/airflow/dags/spark_processing.py",
+		application = "spark_processing.py",
 		conn_id= 'spark_local', 
 		task_id='spark_submit_task', 
 		dag=spark_dag
