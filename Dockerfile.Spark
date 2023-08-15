@@ -3,7 +3,7 @@ FROM bitnami/spark:latest
 
 USER root
 
-COPY dags/spark_processing.py /opt/apache/spark
+COPY dags/spark_processing.py /opt/bitnami/spark
 
 # Install Python packages
 RUN pip install --no-cache-dir -U pip \
