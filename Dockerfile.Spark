@@ -5,7 +5,6 @@ USER root
 
 COPY dags/spark_processing.py /opt/apache/spark
 
-USER airflow
 # Install Python packages
 RUN pip install --no-cache-dir -U pip \
     && pip install --no-cache-dir \

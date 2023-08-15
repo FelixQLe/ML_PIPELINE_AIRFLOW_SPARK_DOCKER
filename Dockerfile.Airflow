@@ -36,9 +36,6 @@ RUN pip install --no-cache-dir -U pip \
     && pip install --no-cache-dir \
     celery \
     redis \
-    tensorflow \
-    scikit-learn \
-    joblib \
     sqlalchemy \
     apache-airflow-providers-apache-spark \
     apache-airflow-providers-postgres \
