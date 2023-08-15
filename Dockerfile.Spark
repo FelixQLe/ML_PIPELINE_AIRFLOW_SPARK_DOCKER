@@ -2,8 +2,11 @@ FROM bitnami/spark:latest
 
 
 USER root
+COPY ./dags/spark_processing.py /opt/bitnami/spark/
+COPY ./dags/A.csv /opt/bitnami/spark/
 
-COPY dags/spark_processing.py /opt/bitnami/spark
+# Set executable permission on /opt/bitnami/spark/ directory
+RUN chmod +x /opt/bitnami/spark/
 
 # Install Python packages
 RUN pip install --no-cache-dir -U pip \
@@ -14,3 +17,6 @@ RUN pip install --no-cache-dir -U pip \
 #COPY ./requirements_spark.txt /
 #RUN pip install --upgrade pip
 #RUN pip install -r /requirements_spark.txt
+
+# Switch back to the non-root user
+USER 1001
