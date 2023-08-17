@@ -62,4 +62,4 @@ RUN pip install --no-cache-dir -U pip \
 #COPY ./requirements_airflow.txt /
 #RUN pip install -r /requirements_airflow.txt
 
-COPY --chown=airflow:root ./dags /opt/airflow/dags
+#COPY --chown=airflow:root ./dags /opt/airflow/dags
