@@ -2,7 +2,7 @@ FROM bitnami/spark:latest
 
 
 USER root
-COPY ./dags/spark_processing.py /opt/bitnami/spark/
+COPY ./dags/spark_task/spark_testing_job.py /opt/bitnami/spark/
 COPY ./dags/data/A.csv /opt/bitnami/spark/
 
 # Set executable permission on /opt/bitnami/spark/ directory

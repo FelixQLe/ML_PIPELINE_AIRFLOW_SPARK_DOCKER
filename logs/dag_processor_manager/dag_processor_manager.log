@@ -1,0 +1,30 @@
+[2023-08-18T01:17:07.221+0000] {manager.py:487} INFO - Processing files using up to 2 processes at a time 
+[2023-08-18T01:17:07.222+0000] {manager.py:488} INFO - Process each file at most once every 30 seconds
+[2023-08-18T01:17:07.225+0000] {manager.py:489} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2023-08-18T01:17:07.227+0000] {manager.py:758} INFO - Searching for files in /opt/airflow/dags
+[2023-08-18T01:17:07.268+0000] {manager.py:761} INFO - There are 1 files in /opt/airflow/dags
+[2023-08-18T01:17:07.392+0000] {manager.py:889} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-----------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/spark_jobs_dag.py     24  0.03s             0           0
+================================================================================
+[2023-08-18T01:17:37.625+0000] {manager.py:889} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                            PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-----------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/spark_jobs_dag.py                           1           0  0.49s           2023-08-18T01:17:07
+================================================================================
+[2023-08-18T01:18:08.397+0000] {manager.py:889} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-----------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/spark_jobs_dag.py     40  0.01s             1           0  0.10s           2023-08-18T01:17:38
+================================================================================
+[2023-08-18T01:18:26.665+0000] {manager.py:470} INFO - Exiting gracefully upon receiving signal 15
