@@ -19,7 +19,7 @@ existing_schema = StructType([
 ])
 
 #stock = pd.read_csv('./dags/data/A.csv')
-stock_df = spark.read.csv("./dags/data/A.csv", header=True, schema=existing_schema)
+stock_df = spark.read.csv("file:///dags/data/A.csv", header=True, schema=existing_schema)
 
 stock_df = stock_df.withColumn("Symbol", F.lit("A"))
 
