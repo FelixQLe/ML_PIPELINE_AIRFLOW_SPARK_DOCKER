@@ -1,0 +1,26 @@
+[2023-08-18T01:35:30.158+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spark_airflow_dag.spark_submit_task manual__2023-08-18T01:35:29.432737+00:00 [queued]>
+[2023-08-18T01:35:30.167+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spark_airflow_dag.spark_submit_task manual__2023-08-18T01:35:29.432737+00:00 [queued]>
+[2023-08-18T01:35:30.168+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2023-08-18T01:35:30.177+0000] {taskinstance.py:1327} INFO - Executing <Task(SparkSubmitOperator): spark_submit_task> on 2023-08-18 01:35:29.432737+00:00
+[2023-08-18T01:35:30.181+0000] {standard_task_runner.py:57} INFO - Started process 292 to run task
+[2023-08-18T01:35:30.185+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'spark_***_dag', 'spark_submit_task', 'manual__2023-08-18T01:35:29.432737+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/spark_jobs_dag.py', '--cfg-path', '/tmp/tmp7pknidfr']
+[2023-08-18T01:35:30.187+0000] {standard_task_runner.py:85} INFO - Job 6: Subtask spark_submit_task
+[2023-08-18T01:35:30.239+0000] {task_command.py:410} INFO - Running <TaskInstance: spark_airflow_dag.spark_submit_task manual__2023-08-18T01:35:29.432737+00:00 [running]> on host 15ea5e9ca941
+[2023-08-18T01:35:30.305+0000] {taskinstance.py:1545} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='spark_***_dag' AIRFLOW_CTX_TASK_ID='spark_submit_task' AIRFLOW_CTX_EXECUTION_DATE='2023-08-18T01:35:29.432737+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-08-18T01:35:29.432737+00:00'
+[2023-08-18T01:35:30.316+0000] {base.py:73} INFO - Using connection ID 'spark_local' for task execution.
+[2023-08-18T01:35:30.318+0000] {spark_submit.py:340} INFO - Spark-Submit cmd: spark-submit --master localhost:8090 --name arrow-spark utils/spark_processing.py
+[2023-08-18T01:35:30.401+0000] {spark_submit.py:491} INFO - /home/***/.local/lib/python3.10/site-packages/pyspark/bin/load-spark-env.sh: line 68: ps: command not found
+[2023-08-18T01:35:31.627+0000] {spark_submit.py:491} INFO - python3: can't open file '/opt/***/utils/spark_processing.py': [Errno 2] No such file or directory
+[2023-08-18T01:35:31.636+0000] {spark_submit.py:491} INFO - 23/08/18 01:35:31 INFO ShutdownHookManager: Shutdown hook called
+[2023-08-18T01:35:31.638+0000] {spark_submit.py:491} INFO - 23/08/18 01:35:31 INFO ShutdownHookManager: Deleting directory /tmp/spark-41959969-da25-47c7-9475-0659fefe1949
+[2023-08-18T01:35:31.681+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 156, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 422, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master localhost:8090 --name arrow-spark utils/spark_processing.py. Error code is: 2.
+[2023-08-18T01:35:31.684+0000] {taskinstance.py:1345} INFO - Marking task as FAILED. dag_id=spark_***_dag, task_id=spark_submit_task, execution_date=20230818T013529, start_date=20230818T013530, end_date=20230818T013531
+[2023-08-18T01:35:31.692+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 6 for task spark_submit_task (Cannot execute: spark-submit --master localhost:8090 --name arrow-spark utils/spark_processing.py. Error code is: 2.; 292)
+[2023-08-18T01:35:31.718+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2023-08-18T01:35:31.734+0000] {taskinstance.py:2651} INFO - 0 downstream tasks scheduled from follow-on schedule check
