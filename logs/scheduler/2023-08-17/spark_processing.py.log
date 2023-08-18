@@ -126,3 +126,329 @@
 [2023-08-17T04:06:42.230+0000] {logging_mixin.py:149} INFO - [2023-08-17T04:06:42.230+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
 [2023-08-17T04:06:42.232+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
 [2023-08-17T04:06:42.252+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.037 seconds
+[2023-08-17T06:05:24.946+0000] {processor.py:157} INFO - Started process (PID=2269) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:05:24.948+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:05:24.949+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:05:24.949+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:05:29.530+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:05:29.513+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:05:29.539+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:05:29.578+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 4.636 seconds
+[2023-08-17T06:05:37.038+0000] {processor.py:157} INFO - Started process (PID=2429) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:05:37.041+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:05:37.044+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:05:37.043+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:05:41.417+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:05:41.408+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:05:41.421+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:05:41.444+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 4.411 seconds
+[2023-08-17T06:06:11.585+0000] {processor.py:157} INFO - Started process (PID=2599) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:06:11.587+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:06:11.588+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:06:11.588+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:06:15.056+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:06:15.047+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:06:15.062+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:06:15.097+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.517 seconds
+[2023-08-17T06:06:46.033+0000] {processor.py:157} INFO - Started process (PID=2766) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:06:46.035+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:06:46.037+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:06:46.037+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:06:49.292+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:06:49.283+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:06:49.295+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:06:49.317+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.289 seconds
+[2023-08-17T06:07:19.429+0000] {processor.py:157} INFO - Started process (PID=2935) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:07:19.432+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:07:19.433+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:07:19.433+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:07:22.722+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:07:22.713+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:07:22.726+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:07:22.747+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.326 seconds
+[2023-08-17T06:07:52.877+0000] {processor.py:157} INFO - Started process (PID=3110) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:07:52.880+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:07:52.881+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:07:52.881+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:07:56.204+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:07:56.195+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:07:56.208+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:07:56.230+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.360 seconds
+[2023-08-17T06:08:26.315+0000] {processor.py:157} INFO - Started process (PID=3277) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:08:26.316+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:08:26.318+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:08:26.318+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:08:29.568+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:08:29.559+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:08:29.572+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:08:29.593+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.284 seconds
+[2023-08-17T06:08:59.656+0000] {processor.py:157} INFO - Started process (PID=3446) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:08:59.657+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:08:59.659+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:08:59.659+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:09:03.160+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:09:03.149+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:09:03.165+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:09:03.189+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.539 seconds
+[2023-08-17T06:09:34.020+0000] {processor.py:157} INFO - Started process (PID=3615) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:09:34.021+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:09:34.023+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:09:34.022+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:09:37.694+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:09:37.686+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:09:37.699+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:09:37.719+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.703 seconds
+[2023-08-17T06:10:08.485+0000] {processor.py:157} INFO - Started process (PID=3786) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:10:08.488+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:10:08.489+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:10:08.489+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:10:11.647+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:10:11.638+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:10:11.651+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:10:11.672+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.193 seconds
+[2023-08-17T06:10:42.007+0000] {processor.py:157} INFO - Started process (PID=3954) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:10:42.010+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:10:42.011+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:10:42.011+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:10:45.440+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:10:45.431+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:10:45.445+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:10:45.466+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.466 seconds
+[2023-08-17T06:11:15.536+0000] {processor.py:157} INFO - Started process (PID=4122) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:15.539+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:11:15.540+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:15.540+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:19.159+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:19.151+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:11:19.163+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:19.183+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.653 seconds
+[2023-08-17T06:11:49.899+0000] {processor.py:157} INFO - Started process (PID=4291) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:49.902+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:11:49.903+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:49.903+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:53.338+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:53.328+0000] {dagbag.py:350} ERROR - Failed to import: /opt/airflow/dags/spark_processing.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 346, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/spark_processing.py", line 21, in <module>
+    stock_df = spark.read.csv("dags/A.csv", header=True, schema=existing_schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/home/airflow/.local/lib/python3.10/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pyspark/errors/exceptions/captured.py", line 175, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/Users/hople/working_folder/ML_PIPELINE_AIRFLOW_SPARK_DOCKER/A.csv.
+[2023-08-17T06:11:53.342+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:53.363+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 3.472 seconds
+[2023-08-17T06:11:57.057+0000] {processor.py:157} INFO - Started process (PID=4459) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:57.059+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:11:57.061+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:57.061+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:57.065+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:57.065+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:11:57.066+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:57.087+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.036 seconds
+[2023-08-17T06:11:58.088+0000] {processor.py:157} INFO - Started process (PID=4460) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:58.091+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:11:58.092+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:58.092+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:58.096+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:11:58.096+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:11:58.098+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:11:58.119+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.038 seconds
+[2023-08-17T06:12:06.234+0000] {processor.py:157} INFO - Started process (PID=4461) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:06.236+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:12:06.238+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:12:06.238+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:06.241+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:12:06.241+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:12:06.242+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:06.265+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.038 seconds
+[2023-08-17T06:12:07.318+0000] {processor.py:157} INFO - Started process (PID=4463) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:07.320+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:12:07.322+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:12:07.321+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:07.326+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:12:07.326+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:12:07.327+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:07.349+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.035 seconds
+[2023-08-17T06:12:37.666+0000] {processor.py:157} INFO - Started process (PID=4472) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:37.668+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:12:37.669+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:12:37.669+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:37.673+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:12:37.673+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:12:37.674+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:12:37.694+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.033 seconds
+[2023-08-17T06:13:08.006+0000] {processor.py:157} INFO - Started process (PID=4481) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:08.009+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:13:08.010+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:13:08.010+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:08.013+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:13:08.013+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:13:08.014+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:08.033+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.031 seconds
+[2023-08-17T06:13:17.140+0000] {processor.py:157} INFO - Started process (PID=4482) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:17.142+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:13:17.143+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:13:17.143+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:17.146+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:13:17.146+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:13:17.147+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:17.168+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.034 seconds
+[2023-08-17T06:13:47.516+0000] {processor.py:157} INFO - Started process (PID=4491) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:47.519+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:13:47.520+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:13:47.520+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:47.523+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:13:47.523+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:13:47.524+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:13:47.545+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.036 seconds
+[2023-08-17T06:14:17.869+0000] {processor.py:157} INFO - Started process (PID=4500) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:14:17.872+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:14:17.873+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:14:17.873+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:14:17.876+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:14:17.876+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:14:17.877+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:14:17.897+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.034 seconds
+[2023-08-17T06:14:48.205+0000] {processor.py:157} INFO - Started process (PID=4509) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:14:48.209+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:14:48.210+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:14:48.210+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:14:48.214+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:14:48.214+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:14:48.215+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:14:48.238+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.038 seconds
+[2023-08-17T06:15:18.576+0000] {processor.py:157} INFO - Started process (PID=4518) to work on /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:15:18.578+0000] {processor.py:826} INFO - Processing file /opt/airflow/dags/spark_processing.py for tasks to queue
+[2023-08-17T06:15:18.580+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:15:18.579+0000] {dagbag.py:541} INFO - Filling up the DagBag from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:15:18.583+0000] {logging_mixin.py:149} INFO - [2023-08-17T06:15:18.583+0000] {dagbag.py:327} INFO - File /opt/airflow/dags/spark_processing.py assumed to contain no DAGs. Skipping.
+[2023-08-17T06:15:18.584+0000] {processor.py:838} WARNING - No viable dags retrieved from /opt/airflow/dags/spark_processing.py
+[2023-08-17T06:15:18.604+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/spark_processing.py took 0.034 seconds

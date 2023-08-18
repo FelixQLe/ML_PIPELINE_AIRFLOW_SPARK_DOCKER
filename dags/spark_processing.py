@@ -17,12 +17,12 @@ existing_schema = StructType([
     StructField("Security Name", FloatType(), True)
 ])
 
-stock_df = spark.read.csv('dags/data/A.csv', header=True, schema=existing_schema)
+stock_df = spark.read.csv("dags/A.csv", header=True, schema=existing_schema)
 
 stock_df = stock_df.withColumn("Symbol", F.lit("A"))
 
  # Save the preprocessed data to a parquet file
-stock_df.write.mode("overwrite").option("compression", "snappy").parquet("dags/data/A"+"_preprocessed.parquet")
+stock_df.write.mode("overwrite").option("compression", "snappy").parquet("dags/A_preprocessed.parquet")
 
 
 

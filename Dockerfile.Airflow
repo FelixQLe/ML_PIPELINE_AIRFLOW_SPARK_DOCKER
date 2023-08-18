@@ -18,28 +18,17 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN chmod +x /opt/airflow/dags/
 
 # Set JAVA_HOME
 #ENV JAVA_HOME /usr/
 #RUN export JAVA_HOME
-#grant USER root to create folder
-#USER root
-# Avoid warnings by switching to noninteractive
-#ENV DEBIAN_FRONTEND=noninteractive
-# Install additional packages
-#    postgresql-client \
-#    postgresql \
+
 RUN apt-get update && apt-get install -y \
     && apt-get autoremove -yqq --purge \
     && apt-get clean
 
-
 USER airflow
-# Set environment variables
-#ENV AIRFLOW_HOME=/opt/airflow
-#ENV DAGS_DIR=/opt/airflow/dags
-# Switch back to dialog for any ad-hoc use of apt-get
-#ENV DEBIAN_FRONTEND=dialog
 
 # Install Python packages
 RUN pip install --no-cache-dir -U pip \
@@ -55,11 +44,5 @@ RUN pip install --no-cache-dir -U pip \
     numpy \
     pyarrow
 
-#    && pip install --no-cache-dir -U pip \
-#    && pip install --no-cache-dir \
-#USER airflow
-
-#COPY ./requirements_airflow.txt /
-#RUN pip install -r /requirements_airflow.txt
 
 #COPY --chown=airflow:root ./dags /opt/airflow/dags
